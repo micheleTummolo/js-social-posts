@@ -60,6 +60,30 @@ let postContainer = document.getElementById('container')
 
 postGenerator(posts.length)
 
+let liked = document.getElementsByClassName('js-like-button')
+
+let likedPosts = []
+
+for (let i = 0; i < liked.length; i++){
+    
+    liked[i].addEventListener('click', function(){
+        liked[i].classList.add('like-button--liked')
+
+        const postId = this.dataset.postid
+        const likes = document.getElementById(`like-counter-${postId}`)
+
+        const likesNumber = parseInt(likes.innerText)
+
+        likes.innerText = likesNumber+1
+        if (!likedPosts.includes(postId)){
+            likedPosts.push(postId)
+            console.log(likedPosts)
+        }
+    })
+}
+
+
+
 function postGenerator(arrayLength) {
 
     for (let i = 0; i < arrayLength; i++) {
@@ -83,13 +107,13 @@ function postGenerator(arrayLength) {
             <div class="post__footer">
                 <div class="likes js-likes">
                     <div class="likes__cta">
-                        <a class="like-button  js-like-button" href="#" data-postid="1">
+                        <a class="like-button  js-like-button" href="#" data-postid="${posts[i].id}">
                             <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                             <span class="like-button__label">Mi Piace</span>
                         </a>
                     </div>
                     <div class="likes__counter">
-                        Piace a <b id="like-counter-1" class="js-likes-counter">${posts[i].likes}</b> persone
+                        Piace a <b id="like-counter-${posts[i].id}" class="js-likes-counter">${posts[i].likes}</b> persone
                     </div>
                 </div> 
             </div>            
