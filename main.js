@@ -74,11 +74,22 @@ for (let i = 0; i < liked.length; i++){
 
         const likesNumber = parseInt(likes.innerText)
 
-        likes.innerText = likesNumber+1
         if (!likedPosts.includes(postId)){
             likedPosts.push(postId)
+            likes.innerText = likesNumber+1
             console.log(likedPosts)
         }
+        else {
+            let index = likedPosts.indexOf(postId)
+            if (index > -1) { 
+                likedPosts.splice(index, 1); 
+              }
+            liked[i].classList.remove('like-button--liked')
+            likes.innerText = likesNumber-1
+            console.log(likedPosts)
+        }
+        
+
     })
 }
 
