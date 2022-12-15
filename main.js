@@ -38,7 +38,7 @@ const posts = [
         "media": "https://unsplash.it/600/400?image=24",
         "author": {
             "name": "Luca Formicola",
-            "image": "https://unsplash.it/300/300?image=42"
+            "image": null
         },
         "likes": 56,
         "created": "2021-04-03"
@@ -94,16 +94,46 @@ for (let i = 0; i < liked.length; i++){
 }
 
 
+/* for (i = 0; i < posts.length; i++) {
+    if (posts[i].author.image == null){
+        let splitName = posts[i].author.name.split(' ')
+        console.log(splitName)
+        let name = splitName[0]
+        let surname = splitName[1]
+        let nameLetter = name[0]
+        let surnameLetter = surname[0]
+        let userNameLetters = `${nameLetter}${surnameLetter}`
+        console.log(nameLetter)
+        console.log(surnameLetter)
+        console.log(userNameLetters)
+    }
+} */
+
 
 function postGenerator(arrayLength) {
 
     for (let i = 0; i < arrayLength; i++) {
+        let fallback
+        if (posts[i].author.image == null){
+            let splitName = posts[i].author.name.split(' ')
+            console.log(splitName)
+            let name = splitName[0]
+            let surname = splitName[1]
+            let nameLetter = name[0]
+            let surnameLetter = surname[0]
+            let authorImage = `${nameLetter}${surnameLetter}`
+            fallback = authorImage
+            console.log(authorImage)
+            console.log(i)
+            
+        }
+
         postContainer.innerHTML += `
         <div class="post">
             <div class="post__header">
                 <div class="post-meta">                    
-                    <div class="post-meta__icon">
-                        <img class="profile-pic" src=${posts[i].author.image} alt="Phil Mangione">                    
+                    <div class="post-meta__icon profile_image_null">
+                        <img class="profile-pic" src=${posts[i].author.image} alt="${fallback}">                    
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${posts[i].author.name}</div>
